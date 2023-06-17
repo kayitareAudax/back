@@ -9,11 +9,11 @@ exports.getOwners=async(req,res,next)=>{
     return res.json({success:true,message:"owners found",data:owners});
 }
 exports.getOwner=async(req,res,next)=>{
-    const Owner=await Owner.findById(req.params.id);
-    if(!Owner){
-        return res.json({success:false,message:"No Owner found",data:Owner});
+    const owner=await Owner.findById(req.params.id);
+    if(!owner){
+        return res.json({success:false,message:"No Owner found",data:owner});
     }
-    return res.json({success:true,message:"Owner found",data:Owner})
+    return res.json({success:true,message:"Owner found",data:owner})
 }
 exports.createOwner=async(req,res,next)=>{
     const {telephone,address,names,nationalId}=req.body

@@ -3,7 +3,7 @@ const ownerSchema=new mongoose.Schema({
     names:String,
     nationalId:String,
     telephone:String,
-    address:Number,
+    address:String,
 })
-const Owner=mongoose.model('Owner',ownerSchema);
+const Owner=mongoose.model('Owner',ownerSchema,'owners');
 module.exports=Owner;

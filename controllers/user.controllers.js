@@ -21,7 +21,6 @@ exports.loginUser=async(req,res,next)=>{
     const user = await User.findOne({ email});
     if (!user) {
         return res.json({success:false,message:"invalid credentials"});
-
     }
     const isMatch = await user.matchPasswords(password);
   
@@ -31,6 +30,7 @@ exports.loginUser=async(req,res,next)=>{
         return res.json({success:true,message:user.generateAuthToken()}); 
 }
 exports.adminDash=async(req,res,next)=>{
+    console.log(req.user);
     const user=await User.findById(req.user.id).select("-password");
     if(!user){
         return res.json({success:false,message:"user not found"});

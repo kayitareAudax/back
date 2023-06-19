@@ -12,7 +12,7 @@ exports.registerUser=async(req,res,next)=>{
     if (user){
         return res.json({success:false,message:"email already registered"})
     }
-    const newUser=await User.create(req.body);
+    const newUser=await User.create(req.body)
     newUser.save();
     return res.json({success:true,message:newUser.generateAuthToken()});
 }

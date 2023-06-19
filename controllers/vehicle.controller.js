@@ -2,7 +2,7 @@ const { validationResult } = require("express-validator");
 const Vehicle = require("../models/Vehicle.model")
 const Owner = require("../models/Owner.model")
 exports.getVehicles = async (req, res, next) => {
-    console.log("reached here");
+
     try {
         const page = parseInt(req.query.page) || 1; // Get the page number from the query parameters, default to page 1
         const limit = parseInt(req.query.limit) || 10; // Get the number of items per page from the query parameters, default to 10
@@ -42,7 +42,6 @@ exports.getVehicle = async (req, res, next) => {
     }
 }
 exports.getAll = async (req, res, next) => {
-    console.log("reached here");
     try {
         const vehicles = await Vehicle.find().populate('owner').exec();
         return res.json({ success: true, message: "Got all vehicles", data: vehicles })
@@ -72,4 +71,15 @@ exports.deleteVehicle = async (req, res, next) => {
     const vehicle =await Vehicle.findByIdAndDelete(req.params.id);
     console.log('trying delete');
     return res.json({ success: true, message: "vehicle deleted" });
+}
+exports.updateVehicle=async(req,res,next)=>{
+    const {chasis,modelName,manufactureCompany,manufactureYear,price,plateNumber}=req.body;
+    const id=req.params.id;
+    try {
+        const updated=await Vehicle.findByIdAndUpdate(id,req.body,{new:true});
+        await updated.save()
+        return res.json({success:true,message:"updated successfully",data:updated})
+    } catch (error) {
+        console.log(error);
+    }
 }

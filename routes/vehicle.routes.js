@@ -1,5 +1,5 @@
 const { check } = require("express-validator");
-const { getVehicles, createVehicle, deleteVehicle, getVehicle,addOwner, getAll } = require("../controllers/Vehicle.controller");
+const { getVehicles, createVehicle, deleteVehicle, getVehicle,addOwner, getAll, updateVehicle } = require("../controllers/Vehicle.controller");
 const { verifyToken } = require("../middlewares/auth.middleware");
 
 const router=require("express").Router();
@@ -17,4 +17,5 @@ router.route("/:id").delete(deleteVehicle);
 router.route("/:id").get(getVehicle)
 router.route("/:id").put(addOwner)
 router.route("/all").get(getAll);
+router.route("/update/:id").put(updateVehicle)
 module.exports=router;
